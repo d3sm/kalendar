@@ -1,0 +1,20 @@
+included:
+  - ios
+
+disabled_rules:
+  - file_length
+  - type_body_length
+  - function_body_length
+  - function_parameter_count
+  - cyclomatic_complexity
+  - line_length
+  - nesting
+  - identifier_name
+  - todo
+  # A trailing @ViewBuilder closure next to other closure params is idiomatic SwiftUI.
+  - multiple_closures_with_trailing_closure
+
+opt_in_rules:
+  - closure_spacing
+  - empty_count
+  - collection_alignment

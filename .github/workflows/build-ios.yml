@@ -1,0 +1,29 @@
+name: iOS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - 'ios/**'
+      - 'Package.swift'
+      - 'spec/swift/**'
+      - 'spec/fixtures/**'
+      - '.swiftlint.yml'
+      - '.github/workflows/build-ios.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: SwiftLint
+        run: |
+          swiftlint version >/dev/null 2>&1 || brew install swiftlint
+          swiftlint lint --strict
+      - name: Swift core tests
+        run: swift test

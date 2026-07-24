@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@d3sm/kalendar": ["../src/index"],
+      "@d3sm/kalendar/*": ["../src/*"]
+    }
+  }
+}

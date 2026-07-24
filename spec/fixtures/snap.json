@@ -1,0 +1,138 @@
+{
+  "snap": [
+    {
+      "raw": 0,
+      "lo": -570,
+      "hi": 810,
+      "expected": 0
+    },
+    {
+      "raw": 7,
+      "lo": -570,
+      "hi": 810,
+      "expected": 0
+    },
+    {
+      "raw": 8,
+      "lo": -570,
+      "hi": 810,
+      "expected": 15
+    },
+    {
+      "raw": -7,
+      "lo": -570,
+      "hi": 810,
+      "expected": 0
+    },
+    {
+      "raw": -8,
+      "lo": -570,
+      "hi": 810,
+      "expected": -15
+    },
+    {
+      "raw": -7.5,
+      "lo": -570,
+      "hi": 810,
+      "expected": 0
+    },
+    {
+      "raw": 7.5,
+      "lo": -570,
+      "hi": 810,
+      "expected": 15
+    },
+    {
+      "raw": 22.5,
+      "lo": -570,
+      "hi": 810,
+      "expected": 30
+    },
+    {
+      "raw": -22.5,
+      "lo": -570,
+      "hi": 810,
+      "expected": -15
+    },
+    {
+      "raw": 900,
+      "lo": -570,
+      "hi": 810,
+      "expected": 810
+    },
+    {
+      "raw": -900,
+      "lo": -570,
+      "hi": 810,
+      "expected": -570
+    },
+    {
+      "raw": 803,
+      "lo": -570,
+      "hi": 810,
+      "expected": 810
+    },
+    {
+      "raw": -565,
+      "lo": -570,
+      "hi": 810,
+      "expected": -570
+    }
+  ],
+  "slot": [
+    {
+      "pressed": 615,
+      "startHour": 0,
+      "endHour": 24,
+      "expected": {
+        "start": 600,
+        "end": 660
+      }
+    },
+    {
+      "pressed": 629,
+      "startHour": 0,
+      "endHour": 24,
+      "expected": {
+        "start": 600,
+        "end": 660
+      }
+    },
+    {
+      "pressed": 630,
+      "startHour": 0,
+      "endHour": 24,
+      "expected": {
+        "start": 630,
+        "end": 690
+      }
+    },
+    {
+      "pressed": 5,
+      "startHour": 7,
+      "endHour": 22,
+      "expected": {
+        "start": 420,
+        "end": 480
+      }
+    },
+    {
+      "pressed": 1435,
+      "startHour": 0,
+      "endHour": 24,
+      "expected": {
+        "start": 1380,
+        "end": 1440
+      }
+    },
+    {
+      "pressed": 1439,
+      "startHour": 7,
+      "endHour": 22,
+      "expected": {
+        "start": 1260,
+        "end": 1320
+      }
+    }
+  ]
+}

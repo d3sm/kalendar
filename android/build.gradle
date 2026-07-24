@@ -1,0 +1,51 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    google()
+    gradlePluginPortal()
+  }
+  dependencies {
+    // Match the app's Kotlin (RN pins it); the compose compiler plugin must be same version.
+    def kv = rootProject.findProperty('kotlinVersion') ?: '2.1.20'
+    classpath "org.jetbrains.kotlin:compose-compiler-gradle-plugin:$kv"
+  }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+
+group = 'expo.modules.kalendar'
+version = '0.1.0'
+
+def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
+apply from: expoModulesCorePlugin
+applyKotlinExpoModulesCorePlugin()
+useCoreDependencies()
+useExpoPublishing()
+
+android {
+  namespace = "expo.modules.kalendar"
+  defaultConfig {
+    minSdkVersion safeExtGet("minSdkVersion", 24)
+    compileSdkVersion safeExtGet("compileSdkVersion", 35)
+    targetSdkVersion safeExtGet("targetSdkVersion", 35)
+  }
+  buildFeatures {
+    compose true
+  }
+}
+
+dependencies {
+  def composeBom = platform('androidx.compose:compose-bom:2024.12.01')
+  implementation composeBom
+  implementation 'androidx.compose.ui:ui'
+  implementation 'androidx.compose.foundation:foundation'
+  implementation 'androidx.compose.material3:material3'
+  implementation 'androidx.activity:activity-compose:1.9.3'
+  implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.8.7'
+
+  testImplementation 'junit:junit:4.13.2'
+  // Real org.json on the unit-test classpath (the android.jar one is stubbed).
+  testImplementation 'org.json:json:20240303'
+}

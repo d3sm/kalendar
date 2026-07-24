@@ -1,0 +1,57 @@
+{
+  "name": "@d3sm/kalendar",
+  "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "A native calendar view for React Native — SwiftUI on iOS, Jetpack Compose on Android.",
+  "author": "d3sm <desmj@pm.me> (https://github.com/d3sm/kalendar)",
+  "license": "MIT",
+  "repository": "https://github.com/d3sm/kalendar",
+  "homepage": "https://github.com/d3sm/kalendar#readme",
+  "bugs": "https://github.com/d3sm/kalendar/issues",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "source": "src/index.ts",
+  "scripts": {
+    "build": "expo-module build",
+    "prepublishOnly": "CI=1 expo-module build",
+    "clean": "expo-module clean",
+    "lint": "eslint src/",
+    "test": "npm run spec:ts",
+    "expo-module": "expo-module",
+    "spec:generate": "node --experimental-strip-types spec/generate.mjs",
+    "spec:ts": "TZ=UTC node --experimental-strip-types --experimental-test-module-mocks --test \"spec/ts/*.test.ts\"",
+    "spec:ios": "swift test",
+    "spec:android": "cd example/android && ./gradlew :d3sm-kalendar:testDebugUnitTest",
+    "spec": "npm run spec:ts && npm run spec:ios && npm run spec:android"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "calendar",
+    "new-architecture",
+    "swiftui",
+    "compose"
+  ],
+  "devDependencies": {
+    "@types/react": "19.2.17",
+    "@typescript-eslint/parser": "^8.65.0",
+    "eslint": "^9.7.0",
+    "eslint-config-universe": "^16.0.0",
+    "expo": "^57.0.8",
+    "expo-module-scripts": "^56.0.3",
+    "prettier": "^3.9.6",
+    "react-native": "^0.86.0",
+    "typescript": "~5.8.0"
+  },
+  "peerDependencies": {
+    "expo": ">=57.0.8",
+    "react": ">=19.1.0",
+    "react-native": ">=0.86.0"
+  },
+  "workspaces": [
+    "example"
+  ],
+  "packageManager": "yarn@4.17.1"
+}

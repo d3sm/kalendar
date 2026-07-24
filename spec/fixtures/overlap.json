@@ -1,0 +1,441 @@
+[
+  {
+    "name": "empty",
+    "maxCols": 2,
+    "events": [],
+    "expected": {
+      "placed": [],
+      "overflow": []
+    }
+  },
+  {
+    "name": "single",
+    "maxCols": 2,
+    "events": [
+      {
+        "uid": "a",
+        "start": 570,
+        "end": 630
+      }
+    ],
+    "expected": {
+      "placed": [
+        {
+          "uid": "a",
+          "col": 0,
+          "cols": 1,
+          "reserved": false
+        }
+      ],
+      "overflow": []
+    }
+  },
+  {
+    "name": "disjoint",
+    "maxCols": 2,
+    "events": [
+      {
+        "uid": "a",
+        "start": 540,
+        "end": 600
+      },
+      {
+        "uid": "b",
+        "start": 600,
+        "end": 660
+      },
+      {
+        "uid": "c",
+        "start": 720,
+        "end": 780
+      }
+    ],
+    "expected": {
+      "placed": [
+        {
+          "uid": "a",
+          "col": 0,
+          "cols": 1,
+          "reserved": false
+        },
+        {
+          "uid": "b",
+          "col": 0,
+          "cols": 1,
+          "reserved": false
+        },
+        {
+          "uid": "c",
+          "col": 0,
+          "cols": 1,
+          "reserved": false
+        }
+      ],
+      "overflow": []
+    }
+  },
+  {
+    "name": "pair overlap",
+    "maxCols": 2,
+    "events": [
+      {
+        "uid": "a",
+        "start": 570,
+        "end": 630
+      },
+      {
+        "uid": "b",
+        "start": 585,
+        "end": 645
+      }
+    ],
+    "expected": {
+      "placed": [
+        {
+          "uid": "a",
+          "col": 0,
+          "cols": 2,
+          "reserved": false
+        },
+        {
+          "uid": "b",
+          "col": 1,
+          "cols": 2,
+          "reserved": false
+        }
+      ],
+      "overflow": []
+    }
+  },
+  {
+    "name": "triple overflow on phone",
+    "maxCols": 2,
+    "events": [
+      {
+        "uid": "a",
+        "start": 570,
+        "end": 630
+      },
+      {
+        "uid": "b",
+        "start": 585,
+        "end": 645
+      },
+      {
+        "uid": "c",
+        "start": 600,
+        "end": 660
+      }
+    ],
+    "expected": {
+      "placed": [
+        {
+          "uid": "a",
+          "col": 0,
+          "cols": 2,
+          "reserved": true
+        },
+        {
+          "uid": "b",
+          "col": 1,
+          "cols": 2,
+          "reserved": true
+        }
+      ],
+      "overflow": [
+        {
+          "uids": [
+            "c"
+          ],
+          "start": 600,
+          "end": 660
+        }
+      ]
+    }
+  },
+  {
+    "name": "triple fits on tablet",
+    "maxCols": 3,
+    "events": [
+      {
+        "uid": "a",
+        "start": 570,
+        "end": 630
+      },
+      {
+        "uid": "b",
+        "start": 585,
+        "end": 645
+      },
+      {
+        "uid": "c",
+        "start": 600,
+        "end": 660
+      }
+    ],
+    "expected": {
+      "placed": [
+        {
+          "uid": "a",
+          "col": 0,
+          "cols": 3,
+          "reserved": false
+        },
+        {
+          "uid": "b",
+          "col": 1,
+          "cols": 3,
+          "reserved": false
+        },
+        {
+          "uid": "c",
+          "col": 2,
+          "cols": 3,
+          "reserved": false
+        }
+      ],
+      "overflow": []
+    }
+  },
+  {
+    "name": "chained cluster (transitive overlap)",
+    "maxCols": 2,
+    "events": [
+      {
+        "uid": "a",
+        "start": 540,
+        "end": 600
+      },
+      {
+        "uid": "b",
+        "start": 590,
+        "end": 650
+      },
+      {
+        "uid": "c",
+        "start": 640,
+        "end": 700
+      }
+    ],
+    "expected": {
+      "placed": [
+        {
+          "uid": "a",
+          "col": 0,
+          "cols": 2,
+          "reserved": false
+        },
+        {
+          "uid": "b",
+          "col": 1,
+          "cols": 2,
+          "reserved": false
+        },
+        {
+          "uid": "c",
+          "col": 0,
+          "cols": 2,
+          "reserved": false
+        }
+      ],
+      "overflow": []
+    }
+  },
+  {
+    "name": "column reuse after gap",
+    "maxCols": 2,
+    "events": [
+      {
+        "uid": "a",
+        "start": 540,
+        "end": 600
+      },
+      {
+        "uid": "b",
+        "start": 540,
+        "end": 700
+      },
+      {
+        "uid": "c",
+        "start": 600,
+        "end": 660
+      }
+    ],
+    "expected": {
+      "placed": [
+        {
+          "uid": "b",
+          "col": 0,
+          "cols": 2,
+          "reserved": false
+        },
+        {
+          "uid": "a",
+          "col": 1,
+          "cols": 2,
+          "reserved": false
+        },
+        {
+          "uid": "c",
+          "col": 1,
+          "cols": 2,
+          "reserved": false
+        }
+      ],
+      "overflow": []
+    }
+  },
+  {
+    "name": "two clusters second overflows",
+    "maxCols": 2,
+    "events": [
+      {
+        "uid": "a",
+        "start": 480,
+        "end": 540
+      },
+      {
+        "uid": "b",
+        "start": 600,
+        "end": 720
+      },
+      {
+        "uid": "c",
+        "start": 610,
+        "end": 700
+      },
+      {
+        "uid": "d",
+        "start": 620,
+        "end": 680
+      },
+      {
+        "uid": "e",
+        "start": 630,
+        "end": 690
+      }
+    ],
+    "expected": {
+      "placed": [
+        {
+          "uid": "a",
+          "col": 0,
+          "cols": 1,
+          "reserved": false
+        },
+        {
+          "uid": "b",
+          "col": 0,
+          "cols": 2,
+          "reserved": true
+        },
+        {
+          "uid": "c",
+          "col": 1,
+          "cols": 2,
+          "reserved": true
+        }
+      ],
+      "overflow": [
+        {
+          "uids": [
+            "d",
+            "e"
+          ],
+          "start": 620,
+          "end": 690
+        }
+      ]
+    }
+  },
+  {
+    "name": "zero-length guarded upstream but tolerated",
+    "maxCols": 2,
+    "events": [
+      {
+        "uid": "a",
+        "start": 600,
+        "end": 615
+      },
+      {
+        "uid": "b",
+        "start": 600,
+        "end": 615
+      },
+      {
+        "uid": "c",
+        "start": 600,
+        "end": 615
+      }
+    ],
+    "expected": {
+      "placed": [
+        {
+          "uid": "a",
+          "col": 0,
+          "cols": 2,
+          "reserved": true
+        },
+        {
+          "uid": "b",
+          "col": 1,
+          "cols": 2,
+          "reserved": true
+        }
+      ],
+      "overflow": [
+        {
+          "uids": [
+            "c"
+          ],
+          "start": 600,
+          "end": 615
+        }
+      ]
+    }
+  },
+  {
+    "name": "shared start uses end desc then uid",
+    "maxCols": 3,
+    "events": [
+      {
+        "uid": "b",
+        "start": 600,
+        "end": 660
+      },
+      {
+        "uid": "a",
+        "start": 600,
+        "end": 720
+      },
+      {
+        "uid": "c",
+        "start": 600,
+        "end": 630
+      }
+    ],
+    "expected": {
+      "placed": [
+        {
+          "uid": "a",
+          "col": 0,
+          "cols": 3,
+          "reserved": false
+        },
+        {
+          "uid": "b",
+          "col": 1,
+          "cols": 3,
+          "reserved": false
+        },
+        {
+          "uid": "c",
+          "col": 2,
+          "cols": 3,
+          "reserved": false
+        }
+      ],
+      "overflow": []
+    }
+  }
+]

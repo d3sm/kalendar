@@ -1,0 +1,43 @@
+name: Bug report
+description: Something isn't working as documented.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: A minimal snippet or repo is ideal.
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - iOS
+        - Android
+        - Both
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: kalendar, Expo SDK, React Native, and OS version.
+      placeholder: kalendar 0.1.0, Expo 57, RN 0.86, iOS 26
+    validations:
+      required: true
+  - type: checkboxes
+    id: new-arch
+    attributes:
+      label: New Architecture
+      options:
+        - label: My app runs the New Architecture (Fabric).
+          required: true
