@@ -141,6 +141,7 @@ final class KalendarModel: ObservableObject {
   @Published var maxDate: Date?
   @Published var monthAnchor: Date = Date()
 
+  var onRangeChange: ((Date, Date?) -> Void)?
   var onSelect: ((Date) -> Void)?
   var onOpenDay: ((Date) -> Void)?
   var onDayHold: ((Date) -> Void)?

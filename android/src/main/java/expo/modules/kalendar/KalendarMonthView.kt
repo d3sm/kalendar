@@ -83,6 +83,15 @@ internal fun MonthView(
 
   val onDayTap: (LocalDate, String) -> Unit = { date, key ->
     state.select(date)
+    if (state.selectionMode == SelectionMode.RANGE) {
+      val (start, end) =
+        if (state.rangeStart != null && state.rangeEnd == null) {
+          Pair(KalendarState.key(state.rangeStart!!), key)
+        } else {
+          Pair(key, null)
+        }
+      state.onRangeChange?.invoke(start, end)
+    }
     state.onDayPress?.invoke(key)
     if (state.selectionMode == SelectionMode.SINGLE) {
       when {
@@ -160,11 +169,7 @@ internal fun MonthView(
         modifier =
           Modifier.fillMaxWidth().height(44.dp).clickable {
             val next = !expanded
-            if (!next) {
-              weekAnchor = state.monthAnchor
-            } else {
-              state.monthAnchor = weekAnchor.withDayOfMonth(1)
-            }
+            if (next) state.monthAnchor = weekAnchor.withDayOfMonth(1) else weekAnchor = state.monthAnchor
             expanded = next
             state.onExpandedChange?.invoke(next)
           },

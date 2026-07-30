@@ -30,7 +30,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
@@ -71,9 +70,6 @@ internal fun DayView(
   var hourHeight by remember { mutableStateOf(56f) }
   var editing by remember { mutableStateOf<KalEvent?>(null) }
   var overflowEvs by remember { mutableStateOf<List<KalEvent>?>(null) }
-  val dragOffsets = remember { mutableStateMapOf<String, Int>() }
-  LaunchedEffect(state.events) { dragOffsets.clear() }
-
   LaunchedEffect(pager) {
     snapshotFlow { pager.settledPage }.collectLatest { page ->
       val d = dayFor(page)
@@ -90,7 +86,7 @@ internal fun DayView(
       openedDay = baseDay,
       hourHeight = hourHeight,
       dragLock = dragLock,
-      dragOffsets = dragOffsets,
+      dragOffsets = state.dragOffsets,
       setHourHeight = { hourHeight = it },
       setDragLock = { dragLock = it },
       onEdit = { if (state.canEdit) editing = it },

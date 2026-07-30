@@ -72,7 +72,7 @@ internal fun EditorSheet(
       OutlinedTextField(
         value = title,
         onValueChange = { title = it },
-        label = { Text(state.label("title", "Title")) },
+        label = { Text(state.label("eventTitle", "Title")) },
         modifier = Modifier.fillMaxWidth(),
       )
       Spacer(Modifier.height(12.dp))
@@ -260,7 +260,7 @@ private fun DaySheetEventRow(
     Spacer(Modifier.width(12.dp))
     Column(Modifier.weight(1f)) {
       Text(ev.title, color = text, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-      if (ev.allDay || ev.endKey > ev.key) {
+      if (ev.spanning) {
         Text(state.label("allDay", "All day"), color = muted, fontSize = 12.sp)
       } else {
         Text(

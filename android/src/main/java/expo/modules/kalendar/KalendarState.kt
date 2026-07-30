@@ -2,8 +2,10 @@ package expo.modules.kalendar
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import java.time.LocalDate
@@ -94,6 +96,9 @@ class KalendarState {
 
   var monthAnchor by mutableStateOf(LocalDate.now().withDayOfMonth(1))
   var events by mutableStateOf(listOf<KalEvent>())
+  val dragOffsets: SnapshotStateMap<String, Int> = mutableStateMapOf()
+  var accessibilityLabel by mutableStateOf<String?>(null)
+  var accessibilityHint by mutableStateOf<String?>(null)
   var levelProp by mutableStateOf<String?>(null)
 
   var labels by mutableStateOf<Map<String, String>>(emptyMap())
@@ -103,6 +108,7 @@ class KalendarState {
     fallback: String,
   ): String = labels[key] ?: fallback
 
+  var onRangeChange: ((String, String?) -> Unit)? = null
   var onDayPress: ((String) -> Unit)? = null
   var onDayOpen: ((String) -> Unit)? = null
   var onDayLongPress: ((String) -> Unit)? = null
@@ -150,15 +156,7 @@ class KalendarState {
         selectedKeys = if (selectedKeys == setOf(k)) emptySet() else setOf(k)
       SelectionMode.MULTIPLE ->
         selectedKeys = if (selectedKeys.contains(k)) selectedKeys - k else selectedKeys + k
-      SelectionMode.RANGE ->
-        when {
-          rangeStart == null -> rangeStart = date
-          rangeEnd == null -> rangeEnd = date
-          else -> {
-            rangeStart = date
-            rangeEnd = null
-          }
-        }
+      SelectionMode.RANGE -> Unit
     }
   }
 

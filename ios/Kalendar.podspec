@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name           = 'Kalendar'
-  s.version        = '0.1.0'
+  s.version        = '0.1.1'
   s.summary        = 'Native SwiftUI calendar for React Native — fully styleable.'
   s.description    = 'A custom SwiftUI month grid bridged to React Native. Every color, shape, and font is a prop.'
   s.author         = 'd3sm'

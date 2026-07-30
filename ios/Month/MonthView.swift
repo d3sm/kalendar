@@ -263,6 +263,12 @@ struct MonthView: View {
 
   private func tap(_ date: Date, _ k: String) {
     model.select(date, calendar)
+    if model.selectionMode == .range {
+      let (start, end): (Date, Date?) = (model.rangeStart != nil && model.rangeEnd == nil)
+        ? (model.rangeStart!, date) : (date, nil)
+      model.onRangeChange?(start, end)
+      return
+    }
     guard model.selectionMode == .single else { return }
     if model.expandableEnabled && !expanded { return }
     if model.daySheetEnabled {

@@ -46,3 +46,4 @@ yarn-error.log
 .DS_Store
 
 .ruby-lsp/
+.yarn/install-state.gz

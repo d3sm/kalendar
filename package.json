@@ -1,6 +1,6 @@
 {
   "name": "@d3sm/kalendar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publishConfig": {
     "access": "public"
   },
@@ -13,9 +13,21 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "source": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "default": "./build/index.js"
+    }
+  },
+  "files": [
+    "build/",
+    "ios/",
+    "android/src/",
+    "android/build.gradle"
+  ],
   "scripts": {
     "build": "expo-module build",
-    "prepublishOnly": "CI=1 expo-module build",
+    "prepublish": "CI=1 expo-module build",
     "clean": "expo-module clean",
     "lint": "eslint src/",
     "test": "npm run spec:ts",

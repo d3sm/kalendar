@@ -31,7 +31,7 @@ body:
     attributes:
       label: Versions
       description: kalendar, Expo SDK, React Native, and OS version.
-      placeholder: kalendar 0.1.0, Expo 57, RN 0.86, iOS 26
+      placeholder: kalendar 0.1.1, Expo 57, RN 0.86, iOS 26
     validations:
       required: true
   - type: checkboxes

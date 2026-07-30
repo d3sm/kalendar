@@ -2,7 +2,7 @@
   "expo": {
     "name": "kalendar-example",
     "slug": "kalendar-example",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "scheme": "kalendarexample",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

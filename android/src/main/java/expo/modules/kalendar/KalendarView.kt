@@ -14,6 +14,7 @@ class KalendarView(
 ) : ExpoView(context, appContext) {
   val state = KalendarState()
 
+  private val onRangeChange by EventDispatcher()
   private val onDayPress by EventDispatcher()
   private val onDayOpen by EventDispatcher()
   private val onDayLongPress by EventDispatcher()
@@ -27,6 +28,14 @@ class KalendarView(
   private val onExpandedChange by EventDispatcher()
 
   init {
+    state.onRangeChange = { start, end ->
+      onRangeChange(
+        buildMap {
+          put("start", start)
+          end?.let { put("end", it) }
+        },
+      )
+    }
     state.onDayPress = { key -> onDayPress(mapOf("date" to key, "events" to state.dayEventsPayload(key))) }
     state.onDayOpen = { key -> onDayOpen(mapOf("date" to key)) }
     state.onDayLongPress = { key -> onDayLongPress(mapOf("date" to key, "events" to state.dayEventsPayload(key))) }

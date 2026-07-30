@@ -5,6 +5,7 @@ import SwiftUI
 /// bridges day selection back to JS through an EventDispatcher.
 class KalendarView: ExpoView {
   let model = KalendarModel()
+  let onRangeChange = EventDispatcher()
   let onDayPress = EventDispatcher()
   let onDayOpen = EventDispatcher()
   let onDayLongPress = EventDispatcher()
@@ -23,6 +24,12 @@ class KalendarView: ExpoView {
     clipsToBounds = true
     backgroundColor = .clear
 
+    model.onRangeChange = { [weak self] start, end in
+      guard let self else { return }
+      var payload: [String: Any] = ["start": KalendarModel.key(start)]
+      if let end { payload["end"] = KalendarModel.key(end) }
+      self.onRangeChange(payload)
+    }
     model.onSelect = { [weak self] date in
       guard let self else { return }
       let key = KalendarModel.key(date)

@@ -19,6 +19,7 @@ public class KalendarModule: Module {
 
     View(KalendarView.self) {
       Events(
+        "onRangeChange",
         "onDayPress", "onDayOpen", "onDayLongPress", "onEventPress", "onEventLongPress",
         "onEventChange", "onEventDelete", "onSlotPress", "onLevelChange", "onMonthChange",
         "onExpandedChange"

@@ -61,6 +61,7 @@ export type KalendarLabels = {
   /** Accessibility action that nudges an event 15 minutes earlier. */
   moveEarlier?: string;
 };
+export type RangeChangeEvent = { nativeEvent: { start: string; end?: string } };
 export type LevelChangeEvent = { nativeEvent: { level: KalendarLevel } };
 /** Fired when the displayed month changes from a swipe or the chevrons. `month` is `yyyy-MM-01`. */
 export type MonthChangeEvent = { nativeEvent: { month: string } };
@@ -211,6 +212,7 @@ export type KalendarViewProps = {
   /** Glass variant: `regular` (frosted) or `clear` (maximally transparent). */
   glassVariant?: GlassVariant;
 
+  onRangeChange?: (event: RangeChangeEvent) => void;
   onDayPress?: (event: DayPressEvent) => void;
   /** Fires when the native day view opens — handy for lazily loading that day's events. */
   onDayOpen?: (event: DayOpenEvent) => void;

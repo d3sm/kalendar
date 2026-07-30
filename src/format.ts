@@ -1,6 +1,3 @@
-// Pure time/color helpers, free of any React Native import so they can be
-// unit-tested directly. normalize.ts builds on these.
-
 export const DAY_MINUTES = 24 * 60;
 
 const TIME = /^(\d{1,2}):(\d{2})$/;

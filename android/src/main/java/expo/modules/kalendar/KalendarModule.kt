@@ -32,6 +32,7 @@ class KalendarModule : Module() {
 
       View(KalendarView::class) {
         Events(
+          "onRangeChange",
           "onDayPress",
           "onDayOpen",
           "onDayLongPress",
@@ -149,6 +150,12 @@ class KalendarModule : Module() {
         Prop("testID") { view: KalendarView, value: String? ->
           view.state.testTag = value
         }
+        Prop("accessibilityLabel") { view: KalendarView, value: String? ->
+          view.state.accessibilityLabel = value
+        }
+        Prop("accessibilityHint") { view: KalendarView, value: String? ->
+          view.state.accessibilityHint = value
+        }
         Prop("haptics") { view: KalendarView, value: Boolean? ->
           view.state.hapticsEnabled = value ?: true
         }
@@ -165,6 +172,7 @@ class KalendarModule : Module() {
           view.state.initialScrollTime = value
         }
         Prop("events") { view: KalendarView, value: List<EventRecord>? ->
+          view.state.dragOffsets.clear()
           view.state.events =
             (value ?: emptyList()).mapNotNull { r ->
               if (r.date.isEmpty()) return@mapNotNull null
