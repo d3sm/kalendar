@@ -125,12 +125,12 @@ internal fun MonthView(
       }
       Spacer(Modifier.weight(1f))
       if (!state.scrollContinuous) {
-        Chevron(state, "‹") {
+        Chevron(state, "‹", state.label("prevMonth", "Previous month")) {
           state.monthAnchor = state.clampMonth(state.monthAnchor.minusMonths(1).withDayOfMonth(1))
           state.onMonthChange?.invoke(state.monthAnchor)
         }
         Spacer(Modifier.width(8.dp))
-        Chevron(state, "›") {
+        Chevron(state, "›", state.label("nextMonth", "Next month")) {
           state.monthAnchor = state.clampMonth(state.monthAnchor.plusMonths(1).withDayOfMonth(1))
           state.onMonthChange?.invoke(state.monthAnchor)
         }

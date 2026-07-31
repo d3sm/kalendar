@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
@@ -108,12 +109,22 @@ fun KalendarRoot(state: KalendarState) {
 
     val tag = state.testTag
     val a11yLabel = state.accessibilityLabel
+    val a11yHint = state.accessibilityHint
     Box(
       Modifier
         .fillMaxSize()
         .background(state.background)
         .then(if (tag != null) Modifier.testTag(tag) else Modifier)
-        .then(if (a11yLabel != null) Modifier.semantics { contentDescription = a11yLabel } else Modifier),
+        .then(
+          if (a11yLabel != null || a11yHint != null) {
+            Modifier.semantics {
+              a11yLabel?.let { contentDescription = it }
+              a11yHint?.let { stateDescription = it }
+            }
+          } else {
+            Modifier
+          },
+        ),
     ) {
       AnimatedContent(
         targetState = level,

@@ -62,7 +62,6 @@ internal fun EditorSheet(
   var start by remember { mutableStateOf(ev.startMin) }
   var end by remember { mutableStateOf(ev.endMin) }
   var colorHex by remember { mutableStateOf(ev.colorHex) }
-  val palette = EDITOR_PALETTE
   val text = state.resolvedText()
 
   ModalBottomSheet(onDismissRequest = onDismiss) {
@@ -85,7 +84,7 @@ internal fun EditorSheet(
       }
       Spacer(Modifier.height(12.dp))
       Row {
-        palette.forEach { hex ->
+        EDITOR_PALETTE.forEach { hex ->
           val c = KalendarState.parseColor(hex) ?: Color.Gray
           Box(
             Modifier
@@ -147,7 +146,7 @@ internal fun OverflowSheet(
   val text = state.resolvedText()
   val muted = state.resolvedMuted()
   Column(Modifier.padding(horizontal = 20.dp).padding(bottom = 28.dp)) {
-    Text(state.label("atSameTime", "At the same time"), fontSize = 16.sp, fontWeight = FontWeight.Bold, color = text)
+    Text(state.label("sameTime", "At the same time"), fontSize = 16.sp, fontWeight = FontWeight.Bold, color = text)
     Spacer(Modifier.height(10.dp))
     evs.forEach { ev ->
       Row(
@@ -411,7 +410,7 @@ internal fun DayAgendaInline(
           Spacer(Modifier.width(12.dp))
           Column {
             Text(ev.title, color = text, fontWeight = FontWeight.SemiBold, fontSize = 14.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            if (!ev.allDay && ev.endKey == ev.key) {
+            if (!ev.spanning) {
               Text(
                 "${KalendarState.hm(ev.startMin)} – ${KalendarState.hm(ev.endMin)}",
                 color = muted,

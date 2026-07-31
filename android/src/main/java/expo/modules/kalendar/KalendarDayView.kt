@@ -166,7 +166,7 @@ private fun DayPane(
       verticalAlignment = Alignment.CenterVertically,
       modifier = Modifier.padding(horizontal = 18.dp, vertical = 12.dp),
     ) {
-      Chevron(state, "‹", onClick = onBack)
+      Chevron(state, "‹", state.label("back", "Back"), onClick = onBack)
       Spacer(Modifier.width(14.dp))
       Column {
         Text(

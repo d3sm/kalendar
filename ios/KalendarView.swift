@@ -51,7 +51,9 @@ class KalendarView: ExpoView {
       self?.onEventChange(Self.eventPayload(ev, start, end, title: title, color: colorHex, allDay: allDay))
     }
     model.onEventDelete = { [weak self] ev in
-      self?.onEventDelete(["id": ev.srcId as Any, "date": ev.key])
+      var p: [String: Any] = ["date": ev.key]
+      if let id = ev.srcId { p["id"] = id }
+      self?.onEventDelete(p)
     }
     model.onDayHold = { [weak self] date in
       guard let self else { return }
@@ -118,14 +120,15 @@ class KalendarView: ExpoView {
     _ ev: KalEvent, _ start: Int, _ end: Int,
     title: String? = nil, color: String? = nil, allDay: Bool? = nil
   ) -> [String: Any] {
-    [
-      "id": ev.srcId as Any,
+    var p: [String: Any] = [
       "date": ev.key,
       "allDay": allDay ?? ev.allDay,
       "title": title ?? ev.title,
       "start": KalendarModel.hm(start),
-      "end": KalendarModel.hm(end),
-      "color": (color ?? ev.colorHex) as Any
+      "end": KalendarModel.hm(end)
     ]
+    if let id = ev.srcId { p["id"] = id }
+    if let hex = color ?? ev.colorHex { p["color"] = hex }
+    return p
   }
 }
