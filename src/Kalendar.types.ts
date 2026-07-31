@@ -12,8 +12,6 @@ export type KalendarLevel = 'year' | 'month' | 'day';
 export type KalendarLabels = {
   /** Day-view chip for the current day (also the "today" accessibility suffix). */
   today?: string;
-  /** Accessibility suffix for a day that has events. */
-  hasEvents?: string;
   /** Day-view gutter label above the all-day / multi-day event chips. */
   allDay?: string;
   /** Week-strip agenda: shown when the selected day has no events. */
@@ -24,6 +22,8 @@ export type KalendarLabels = {
   addEvent?: string;
   /** Title of the sheet listing overlapping events. */
   sameTime?: string;
+  /** iOS day view: label on the chip that opens the overflow sheet when events overlap. */
+  moreEvents?: string;
   /** Event editor: sheet title. */
   editEvent?: string;
   /** Event editor: title field. */

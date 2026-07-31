@@ -34,6 +34,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -48,6 +50,7 @@ import java.time.format.DateTimeFormatter
 internal fun Chevron(
   state: KalendarState,
   glyph: String,
+  label: String? = null,
   onClick: () -> Unit,
 ) {
   Box(
@@ -57,6 +60,7 @@ internal fun Chevron(
         .size(36.dp)
         .clip(CircleShape)
         .background(chipFill(state))
+        .then(if (label != null) Modifier.semantics { contentDescription = label } else Modifier)
         .clickable(onClick = onClick),
   ) {
     Text(glyph, color = state.accent, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
@@ -233,9 +237,9 @@ internal fun YearView(
     Row(verticalAlignment = Alignment.CenterVertically) {
       Text("$year", color = state.accent, fontSize = 30.sp, fontWeight = FontWeight.Bold)
       Spacer(Modifier.weight(1f))
-      Chevron(state, "‹") { year-- }
+      Chevron(state, "‹", state.label("prevYear", "Previous year")) { year-- }
       Spacer(Modifier.width(8.dp))
-      Chevron(state, "›") { year++ }
+      Chevron(state, "›", state.label("nextYear", "Next year")) { year++ }
     }
     Spacer(Modifier.height(14.dp))
     for (row in 0 until 4) {

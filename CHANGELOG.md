@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.2] — 2026-07-31
+
+### Fixed
+
+- **iOS event payload** — `id` and `color` were always sent as `null` when absent, so `"id" in event.nativeEvent` was always `true` on iOS. Both keys are now omitted when nil, matching Android.
+- **Android nav accessibility** — previous/next month, previous/next year, and back chevrons had no accessibility labels. They now read from `labels.prevMonth`, `labels.nextMonth`, `labels.prevYear`, `labels.nextYear`, and `labels.back`.
+
+### Removed
+
+- **`hasEvents`** — redundant label key in `KalendarLabels`.
+
 ## [0.1.1] — 2026-07-30
 
 ### Added
@@ -18,5 +29,6 @@
 
 Initial release.
 
+[0.1.2]: https://github.com/d3sm/kalendar/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/d3sm/kalendar/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/d3sm/kalendar/releases/tag/v0.1.0
